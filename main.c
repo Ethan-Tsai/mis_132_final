@@ -10,7 +10,7 @@ int color(int c) {
 	return 0;
 }
 
-
+//設定游標位置
 void gotoxy(int x, int y) {
 	COORD c;
 	c.X = x;
@@ -18,11 +18,57 @@ void gotoxy(int x, int y) {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
 
-void game_statement();
+void game_statement() {
+	system("cls");
+	color(10);
+	gotoxy(44, 1);
+	printf("遊戲說明");
+	color(2);
+
+	int i, j = 1;
+	//輸出上下左右邊框
+	for (i = 3; i <= 28; i++) {
+		for (j = 6; j <= 80; j++) {
+			gotoxy(j, i);
+			if (i == 3 || i == 28) {
+				printf("=");
+			}
+			else if (j == 6 || j == 80) {
+				printf("||");
+			}
+
+		}
+	}
+	color(3);
+	gotoxy(20, 5);
+	printf("1. W,A,S,D,分別控制飛機的上下左右移動");
+
+	color(10);
+	gotoxy(20, 8);
+	printf("2. 按空格發射子彈，打中敵機即可得到一分");
+
+	color(14);
+	gotoxy(20, 11);
+	printf("3.碰到敵機子彈死亡");
+
+	color(4);
+	gotoxy(20, 14);
+	printf("4. 玩的愉快！！！");
+
+	color(8);
+	gotoxy(34, 20);
+	printf("*****按任意鍵開始遊戲*****");
+	_getch();        //按任意鍵返回主介面
+	system("cls");
+}
 int score[SIZE] = {0};
+
 void leadboard(int a) {
 	int i = 0,len = 0;
-	for{i = 0; score[i] ! = 0; }
+	for(i = 0; score[i] != 0;i++){
+		len++;
+	}
+	score[len] = a;
 
 }
 void welcome_to_game() {//主畫面
@@ -63,8 +109,8 @@ void welcome_to_game() {//主畫面
 	default:
 		color(12);
 		gotoxy(43, 28);
-		printf("請輸入1-3之間的數 : ");
-		_getch;//輸入任意鍵
+		printf("請輸入1-3之間的數! ");
+		_getch();
 		system("cls");
 		welcome_to_game();
 	}
@@ -80,46 +126,4 @@ int main(void) {
 	printf("\n\n\n\n\n\n\n\n\n");
 
 	return(0);
-}
-void game_statement(){
-	
-    system("cls");
-    color(10);
-    gotoxy(44,1);
-    printf("遊戲說明");
-    color(2);
-    /*框線
-    int i,j = 1;
-    for (i = 3; i <= 28; i++)  //輸出上下邊框===
-   {
-   for (j = 6; j <= 80; j++) //輸出左右邊框||
-   {
-    gotoxy(j,i);
-    if (i == 3 || i == 28) 
-	    printf("=");
-    else if (j == 6 || j == 80) 
-	    printf("||");
-    }
-    }*/
-    color(3);
-    gotoxy(20,5);
-    printf("1. W,A,S,D,分別控制飛機的上下左右移動");
-    
-    color(10);
-    gotoxy(20,8);
-    printf("2. 按空格發射子彈，打中敵機即可得到一分");
-    
-    color(14);
-    gotoxy(20,11);
-    printf("3.碰到敵機子彈死亡");
-  
-    color(4);
-    gotoxy(20,14);
-    printf("4. 玩的愉快！！！");
-    
-    color(8);
-    gotoxy(34,20);
-    printf("*****按任意鍵開始遊戲*****");
-    _getch();        //按任意鍵返回主介面
-    system("cls");
 }
