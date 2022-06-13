@@ -10,7 +10,7 @@
 #include<string.h>
 #define SIZE 10
 
-/*----------«Å§i­n¥Î¨ìªº¨ç¦¡---------*/ 
+/*----------å®£å‘Šè¦ç”¨åˆ°çš„å‡½å¼---------*/ 
 int exceed_border(COORD* current_xy);							
 int air_plane_move(COORD *current_xy);
 void PRINT_airplane(COORD* current_xy,int choose_weapon);
@@ -24,7 +24,7 @@ void Hit();
 void show_score();
 void HideCursor();
 
-/*-------«Å§i­n¥Î¨ìªº¥ş°ìÅÜ¼Æ-------*/ 
+/*-------å®£å‘Šè¦ç”¨åˆ°çš„å…¨åŸŸè®Šæ•¸-------*/ 
 int score=0;
 int health=1;
 int weapon_choose=1;
@@ -32,14 +32,14 @@ int count_main_while_time = 1;
 int bullet_situation=1;
 
 							
-int refill;				//§N«o¥Î
+int refill;				//å†·å»ç”¨
 
 
 COORD surplus_loc;
 COORD old_airplane_pos;
 
 
-/*-----«Øºc­n¥Î¨ìªºªF¦è-----*/ 
+/*-----å»ºæ§‹è¦ç”¨åˆ°çš„æ±è¥¿-----*/ 
 struct bullet bullet1;
 struct bullet bullet2;
 struct bullet bullet3;
@@ -57,15 +57,15 @@ struct bullet bullet9;
 struct bullet bullet10;
 
 
-/*-----------------------game¥D¨ç¦¡---------*/ 
+/*-----------------------gameä¸»å‡½å¼---------*/ 
 void game_start(){
 
-/*------------ªì©l¤Æ----------*/ 
+/*------------åˆå§‹åŒ–----------*/ 
 	COORD current_xy;
 	current_xy.X = 26;
 	current_xy.Y = 43;
 
-	startup_bullet(&current_xy,&bullet1);		//¤l¼uªì©l 
+	startup_bullet(&current_xy,&bullet1);		//å­å½ˆåˆå§‹ 
 	startup_bullet(&current_xy,&bullet2);
 	startup_bullet(&current_xy,&bullet3);
 	startup_bullet(&current_xy,&bullet4);
@@ -76,19 +76,19 @@ void game_start(){
 	startup_bullet(&current_xy,&bullet9);
 	startup_bullet(&current_xy,&bullet10);
 	
-   	startup_monster();							//¹k¥Ûªì©l 
+   	startup_monster();							//éš•çŸ³åˆå§‹ 
    	
 	surplus_loc.X=120;
 	surplus_loc.Y=40;
 
-    old_airplane_pos=current_xy;				//¦ì¸mªì©l 
+    old_airplane_pos=current_xy;				//ä½ç½®åˆå§‹ 
     
     
-    /*------------------------¹CÀ¸¥D°j°é-----------------------------*/ 
+    /*------------------------éŠæˆ²ä¸»è¿´åœˆ-----------------------------*/ 
     while(count_main_while_time<1500){
     	HideCursor();
     	
-    	if (GetAsyncKeyState(0x10)){			//´«­¸¾÷ªZ¾¹ 
+    	if (GetAsyncKeyState(0x10)){			//æ›é£›æ©Ÿæ­¦å™¨ 
 			weapon_choose = 1;
 			bullet_situation=1;
 		}
@@ -101,7 +101,7 @@ void game_start(){
 			bullet_situation=3;
 		}
 	
-        if(count_main_while_time%3==1){			//ªÅ¥ÕÆF±Ó«×
+        if(count_main_while_time%3==1){			//ç©ºç™½éˆæ•åº¦
         
 	    	if (GetAsyncKeyState(0x20)){
 	    		if(bullet1.end==1)
@@ -136,7 +136,7 @@ void game_start(){
 		}
 
 
-/*----------------¤l¼uµo®g¾÷¨î------------*/ 
+/*----------------å­å½ˆç™¼å°„æ©Ÿåˆ¶------------*/ 
 	    if(bullet1.start==1){
 	        bullet1.end=0;
 	        color(14);
@@ -196,7 +196,7 @@ void game_start(){
 	    }
 	    
 
-/*----------------¤l¼uµo®g¦ì¸m------------*/ 
+/*----------------å­å½ˆç™¼å°„ä½ç½®------------*/ 
 	    if (bullet1.end==1){
 	    	bullet1.xy.X=current_xy.X+2;
 	        bullet1.xy.Y=current_xy.Y+4;
@@ -242,27 +242,27 @@ void game_start(){
 	    	bullet10.xy.X=current_xy.X+2;
 	        bullet10.xy.Y=current_xy.Y+4;
 		}
-/*--------------------¤l¼uµo®g¾÷¨î------------------*/ 
+/*--------------------å­å½ˆç™¼å°„æ©Ÿåˆ¶------------------*/ 
 		
-/*--------------------¤j­P³]©w§¹¦¨¥¿¦¡¶]¨ç¦¡-------*/
+/*--------------------å¤§è‡´è¨­å®šå®Œæˆæ­£å¼è·‘å‡½å¼-------*/
 		
-	    show_surplus_bullet();						//³Ñ¾l¼uÃÄ¶q 
-        air_plane_move(&current_xy);				//­¸¾÷²¾°Ê 
-        exceed_border(&current_xy);					//­¸¾÷Ãä¬É 
-        PRINT_airplane(&current_xy,weapon_choose);	//Åã¥Ü­¸¾÷ 
-    	Hit();										//¼²À»§PÂ_ 
-    	show_score();								//¤À¼Æ­pºâ 
+	    show_surplus_bullet();						//å‰©é¤˜å½ˆè—¥é‡ 
+        air_plane_move(&current_xy);				//é£›æ©Ÿç§»å‹• 
+        exceed_border(&current_xy);					//é£›æ©Ÿé‚Šç•Œ 
+        PRINT_airplane(&current_xy,weapon_choose);	//é¡¯ç¤ºé£›æ©Ÿ 
+    	Hit();										//æ’æ“Šåˆ¤æ–· 
+    	show_score();								//åˆ†æ•¸è¨ˆç®— 
 
-/*-----------------------¥D­n¨ç¦¡-------------------*/
+/*-----------------------ä¸»è¦å‡½å¼-------------------*/
 
 
-/*----------------------¶ñ¼u-------------------*/ 
-		if(refill==1){								//¶ñ¼u 
+/*----------------------å¡«å½ˆ-------------------*/ 
+		if(refill==1){								//å¡«å½ˆ 
 			gotoxy(120,35);
 			if(bullet_situation==1||bullet_situation==2)	
-			printf("§N«o¤¤!!");
+			printf("å†·å»ä¸­!!");
 			if(bullet_situation==3)
-			printf("§Ö³t§N«o!!!");
+			printf("å¿«é€Ÿå†·å»!!!");
 		}else{
 				gotoxy(120,35);
 				printf("              ");
@@ -328,7 +328,7 @@ if(bullet_situation==3){
 }
     
 
-/*--------------------¹k¥Ûª¬ºA----------------------------*/
+/*--------------------éš•çŸ³ç‹€æ…‹----------------------------*/
         int chan=rand()%5+1;
         
             if(chan==1){
@@ -356,14 +356,14 @@ if(bullet_situation==3){
                monster(&monster4);
                monster(&monster5);
             }
-/*--------------------¹k¥Ûª¬ºA_end----------------------------*/   
+/*--------------------éš•çŸ³ç‹€æ…‹_end----------------------------*/   
 
-/*--------------------­«­n_¹CÀ¸¥D°j°éªº­p¼Æ----------------------------*/
+/*--------------------é‡è¦_éŠæˆ²ä¸»è¿´åœˆçš„è¨ˆæ•¸----------------------------*/
 
         count_main_while_time++;  //---
 		     
         gotoxy(60,50);
-        printf("³Ñ¾l :%3d ¬í!",60-count_main_while_time/25);  //¼ÒÀÀ¬í¼Æ 25¥iµø±¡ªp±ø¾ã 
+        printf("å‰©é¤˜ :%3d ç§’!",60-count_main_while_time/25);  //æ¨¡æ“¬ç§’æ•¸ 25å¯è¦–æƒ…æ³æ¢æ•´ 
         Sleep(25);
     }
     
@@ -374,10 +374,10 @@ if(bullet_situation==3){
    	fflush(stdin);
 	rewind(stdin);
 }
-/*--------game ¥D¨ç¦¡_end------*/ 
+/*--------game ä¸»å‡½å¼_end------*/ 
 
 
-int air_plane_move(COORD *current_xy){        //­¸¾÷²¾°Ê 
+int air_plane_move(COORD *current_xy){        //é£›æ©Ÿç§»å‹• 
     int up,down,left,right,space;
 
     up = GetAsyncKeyState(0x26);
@@ -386,25 +386,25 @@ int air_plane_move(COORD *current_xy){        //­¸¾÷²¾°Ê
 	right = GetAsyncKeyState(0x27);
 	space = GetAsyncKeyState(0x20);
 
-	if (GetAsyncKeyState(0x25)){ //¥ª
+	if (GetAsyncKeyState(0x25)){ //å·¦
 		current_xy->X -= 1;
 
 		return 0;
 	}
-	if (GetAsyncKeyState(0x27)){//¥k
+	if (GetAsyncKeyState(0x27)){//å³
 	
 		current_xy->X += 1;
 
 		return 0;
 	}
-	if (GetAsyncKeyState(0x26)){//¤W
+	if (GetAsyncKeyState(0x26)){//ä¸Š
 	
 
 		current_xy->Y -= 1;
 
 		return 0;
 	}
-	if (GetAsyncKeyState(0x28)){//¤U
+	if (GetAsyncKeyState(0x28)){//ä¸‹
 	
 
 		current_xy->Y += 1;
@@ -414,7 +414,7 @@ int air_plane_move(COORD *current_xy){        //­¸¾÷²¾°Ê
 }
 
 
-int exceed_border(COORD* current_xy){ 		//§PÂ_­¸¾÷²¾°ÊÃä¬É
+int exceed_border(COORD* current_xy){ 		//åˆ¤æ–·é£›æ©Ÿç§»å‹•é‚Šç•Œ
 	if (current_xy->X>91){
 		current_xy->X = 91;
 		return 0;
@@ -435,7 +435,7 @@ int exceed_border(COORD* current_xy){ 		//§PÂ_­¸¾÷²¾°ÊÃä¬É
 }
 
 
-void PRINT_airplane(COORD* current_xy,int choose_weapon)		//¦L­¸¾÷ 
+void PRINT_airplane(COORD* current_xy,int choose_weapon)		//å°é£›æ©Ÿ 
 {
 	int i;
 	COORD xy;
@@ -444,20 +444,20 @@ void PRINT_airplane(COORD* current_xy,int choose_weapon)		//¦L­¸¾÷
 	color(8);
 
 
-	if (count_main_while_time != 1)  	//²Ä¤@¦¸¤£¥Î 
+	if (count_main_while_time != 1)  	//ç¬¬ä¸€æ¬¡ä¸ç”¨ 
 	{
 		for (i = 0; i < 6; i++)
 		{
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), old_airplane_pos);
-			printf("        ");       //­¸¾÷²¾°Ê«á_delete
-			old_airplane_pos.Y += 1;  //¤U¤@¦æ­¸¾÷
+			printf("        ");       //é£›æ©Ÿç§»å‹•å¾Œ_delete
+			old_airplane_pos.Y += 1;  //ä¸‹ä¸€è¡Œé£›æ©Ÿ
 		}
 	}
 
-	old_airplane_pos = xy; //§â²{¦b±o¦ì¤l¦s°_¨Ó¯dµ¹¤U¤@­Ó°j°é ±oÁôÂÃ­¸¾÷¥Î
-	for (i = 0; i < 6; i++)  //¦L­¸¾÷
+	old_airplane_pos = xy; //æŠŠç¾åœ¨å¾—ä½å­å­˜èµ·ä¾†ç•™çµ¦ä¸‹ä¸€å€‹è¿´åœˆ å¾—éš±è—é£›æ©Ÿç”¨
+	for (i = 0; i < 6; i++)  //å°é£›æ©Ÿ
 	{
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), xy);    //­¸¾÷¦ì¸m
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), xy);    //é£›æ©Ÿä½ç½®
 		switch (choose_weapon){
 		    case 1:
 		    	weapon1(i);
@@ -469,19 +469,19 @@ void PRINT_airplane(COORD* current_xy,int choose_weapon)		//¦L­¸¾÷
 		    	weapon3(i);
 		    	break;
 		    }
-		xy.Y += 1;//¦C¦L§¹¤@¦æ ·Ç³Æ¦C¦L¤U¤@¦æ
+		xy.Y += 1;//åˆ—å°å®Œä¸€è¡Œ æº–å‚™åˆ—å°ä¸‹ä¸€è¡Œ
 	}
 }
 
 
 
-void shoot(COORD* current_xy,struct bullet* Bullet){					//¤l¼uµo®g 
+void shoot(COORD* current_xy,struct bullet* Bullet){					//å­å½ˆç™¼å°„ 
     if(bullet_situation==1||bullet_situation==2){
 	
 		gotoxy(70,20);
 		gotoxy(Bullet->xy.X,Bullet->xy.Y);
 		printf("^");
-		if(count_main_while_time%(-2*bullet_situation+7)==0){
+		if(count_main_while_time%(-2*bullet_situation+6)==0){
 		gotoxy(Bullet->xy.X,Bullet->xy.Y);
 		printf(" ");
 		Bullet->xy.Y-=1;
@@ -509,14 +509,14 @@ void shoot(COORD* current_xy,struct bullet* Bullet){					//¤l¼uµo®g
 	}
 }
 
-void startup_bullet(COORD* current_xy,struct bullet* Bullet){		//¤l¼uªì©l 
+void startup_bullet(COORD* current_xy,struct bullet* Bullet){		//å­å½ˆåˆå§‹ 
 	Bullet->xy.Y=current_xy->X+2;
 	Bullet->xy.Y=current_xy->Y+4;
 	Bullet->start=0;
 	Bullet->end=1;
 }
 
-void show_surplus_bullet(){										//³Ñ¾l¤l¼u 
+void show_surplus_bullet(){										//å‰©é¤˜å­å½ˆ 
 	color(8);
 
 	gotoxy( surplus_loc.X,surplus_loc.Y);
@@ -524,7 +524,7 @@ void show_surplus_bullet(){										//³Ñ¾l¤l¼u
     if(bullet_situation==1 )surplus= bullet1.end+bullet2.end+bullet3.end+bullet4.end+bullet5.end+bullet6.end;
     if(bullet_situation==2 )surplus= bullet1.end+bullet2.end+bullet3.end+bullet4.end+bullet5.end+bullet6.end+bullet7.end+bullet8.end;
     if(bullet_situation==3 )surplus= bullet1.end+bullet2.end+bullet3.end+bullet4.end+bullet5.end+bullet6.end+bullet7.end+bullet8.end+bullet9.end+bullet10.end;
-    printf("³Ñ¾l¤l¼u¼Æ : %2d",surplus);
+    printf("å‰©é¤˜å­å½ˆæ•¸ : %2d",surplus);
 
 }
 void HideCursor(){
@@ -532,12 +532,12 @@ void HideCursor(){
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE),&cursor_info);
 }
 
-void monster(struct monster *Monster){			//¹k¥Û 
+void monster(struct monster *Monster){			//éš•çŸ³ 
 
     if(count_main_while_time%2==0){
         int i;
 	    Monster->xy.X = Monster->old_xy.X;
-        Monster->xy.Y = Monster->old_xy.Y+1;//¼Ä¤H¦ì¸m
+        Monster->xy.Y = Monster->old_xy.Y+1;//æ•µäººä½ç½®
 	    if(Monster->xy.Y<48){
 	        if (count_main_while_time != 1)  		
 	       {
@@ -545,16 +545,16 @@ void monster(struct monster *Monster){			//¹k¥Û
 		        for (i = 0; i < 2; i++)
 		        {
 		         	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Monster->old_xy);
-		        	printf("  ");       //²¾°Ê«á_delete
-		        	Monster->old_xy.Y += 1;  //¤U¤@¦æ
+		        	printf("  ");       //ç§»å‹•å¾Œ_delete
+		        	Monster->old_xy.Y += 1;  //ä¸‹ä¸€è¡Œ
 		        }
 	        }
-    	    Monster->old_xy = Monster->xy; //§â²{¦b±o¦ì¤l¦s°_¨Ó¯dµ¹¤U¤@­Ó°j°é ±oÁôÂÃ­¸¾÷¥Î
-    	    for (i = 0; i < 2; i++)  //¦L
+    	    Monster->old_xy = Monster->xy; //æŠŠç¾åœ¨å¾—ä½å­å­˜èµ·ä¾†ç•™çµ¦ä¸‹ä¸€å€‹è¿´åœˆ å¾—éš±è—é£›æ©Ÿç”¨
+    	    for (i = 0; i < 2; i++)  //å°
         	{
-		        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Monster->xy);    //­¸¾÷¦ì¸m
+		        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Monster->xy);    //é£›æ©Ÿä½ç½®
 		        printf("xx");
-		        Monster->xy.Y += 1;//¦C¦L§¹¤@¦æ ·Ç³Æ¦C¦L¤U¤@¦æ
+		        Monster->xy.Y += 1;//åˆ—å°å®Œä¸€è¡Œ æº–å‚™åˆ—å°ä¸‹ä¸€è¡Œ
 	        }
         Monster->hit1_xy.X =Monster->xy.X;
         Monster->hit1_xy.Y =Monster->xy.Y-2;
@@ -572,8 +572,8 @@ void monster(struct monster *Monster){			//¹k¥Û
      else{
 	        for (i = 0; i < 2; i++)   {
 		        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Monster->old_xy);
-		    	printf("  ");       //²¾°Ê«á_delete
-		    	Monster->old_xy.Y += 1;  //¤U¤@¦æ
+		    	printf("  ");       //ç§»å‹•å¾Œ_delete
+		    	Monster->old_xy.Y += 1;  //ä¸‹ä¸€è¡Œ
 		    }
 	        Monster->old_xy.X = rand()%96+2;
 	        Monster->old_xy.Y = 2;
@@ -582,7 +582,7 @@ void monster(struct monster *Monster){			//¹k¥Û
 }
 
 
-void startup_monster(){				//ªì©l¹k¥Û 
+void startup_monster(){				//åˆå§‹éš•çŸ³ 
 
 
     monster1.old_xy.X=10;
@@ -646,10 +646,11 @@ void startup_monster(){				//ªì©l¹k¥Û
 }
 
 
-void reset_monster(struct bullet* Bullet,struct monster*Monster){			//¼²À»«á 
+void reset_monster(struct bullet* Bullet,struct monster*Monster){			//æ’æ“Šå¾Œ 
 	
 	int i=0;
-	if ( (Bullet->xy.X==Monster->hit3_xy.X&&Bullet->xy.Y==Monster->hit3_xy.Y )|| (Bullet->xy.X==Monster->hit4_xy.X&&Bullet->xy.Y==Monster->hit4_xy.Y)){
+	if ( (Bullet->xy.X==Monster->hit3_xy.X&&Bullet->xy.Y==Monster->hit3_xy.Y )|| (Bullet->xy.X==Monster->hit4_xy.X&&Bullet->xy.Y==Monster->hit4_xy.Y)||
+ 		(Bullet->xy.X==Monster->hit1_xy.X&&Bullet->xy.Y==Monster->hit1_xy.Y )||(Bullet->xy.X==Monster->hit2_xy.X&&Bullet->xy.Y==Monster->hit2_xy.Y )){
 		score+=1;
 		
 		
@@ -668,7 +669,7 @@ void reset_monster(struct bullet* Bullet,struct monster*Monster){			//¼²À»«á
 }
 
 
-void Hit(){											//¼² 
+void Hit(){											//æ’ 
 	reset_monster(&bullet1,&monster1);
 	reset_monster(&bullet1,&monster2);
 	reset_monster(&bullet1,&monster3);
@@ -732,8 +733,8 @@ void Hit(){											//¼²
 	
 }
 											
-void show_score(){					//¤À¼ÆÅã¥Ü 
+void show_score(){					//åˆ†æ•¸é¡¯ç¤º 
 	gotoxy(120,10);
-	printf("¤À¼Æ%4d",score);
+	printf("åˆ†æ•¸%4d",score);
 }
 /*----game.c_end------*/
